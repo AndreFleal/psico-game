@@ -1,0 +1,7 @@
+<![CDATA[<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="90" fill="none" stroke="black" stroke-width="4"/>
+  <path d="M 65 70 L 85 90 M 65 90 L 85 70" stroke="black" stroke-width="4"/> <!-- Left eye -->
+  <path d="M 135 70 L 155 90 M 135 90 L 155 70" stroke="black" stroke-width="4"/> <!-- Right eye -->
+  <path d="M 60 140 L 140 140" stroke="black" stroke-width="4"/> <!-- Straight mouth -->
+  <path d="M 70 50 L 130 50" stroke="black" stroke-width="4"/> <!-- Angry eyebrows -->
+</svg>]]>
