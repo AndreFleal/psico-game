@@ -6,9 +6,7 @@ import { Level, levels } from "@/types/game";
 import Game from "@/components/Game";
 
 interface GamePageProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }> & { id: string };
 }
 
 export default function GamePage({ params }: GamePageProps) {
@@ -16,6 +14,7 @@ export default function GamePage({ params }: GamePageProps) {
   const [level, setLevel] = useState<Level | null>(null);
 
   const initializeLevel = useCallback(() => {
+    // Using .id directly for backwards compatibility during migration
     const levelId = Number(params.id);
     const currentLevel = levels.find((l) => l.id === levelId);
 
