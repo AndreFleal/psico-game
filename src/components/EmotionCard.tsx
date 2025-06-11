@@ -47,30 +47,30 @@ export default function EmotionCard({
   const getStyleClasses = (style: EmotionCardProps["style"]) => {
     switch (style) {
       case "blackAndWhite":
-        return "bg-gradient-to-br from-gray-50 to-white border-gray-300 shadow-lg hover:shadow-xl transition-shadow duration-300";
+        return "bg-gradient-to-br from-gray-100 to-white border-gray-400 shadow-lg hover:shadow-xl transition-shadow duration-300";
       case "coloredCartoon":
-        return "bg-gradient-to-br from-blue-50 to-purple-50 border-blue-300 shadow-lg hover:shadow-xl transition-shadow duration-300";
+        return "bg-gradient-to-br from-blue-100 to-purple-100 border-blue-400 shadow-lg hover:shadow-xl transition-shadow duration-300";
       case "realistic":
-        return "bg-gradient-to-br from-green-50 to-emerald-50 border-green-300 shadow-lg hover:shadow-xl transition-shadow duration-300";
+        return "bg-gradient-to-br from-green-100 to-emerald-100 border-green-400 shadow-lg hover:shadow-xl transition-shadow duration-300";
       default:
-        return "bg-gradient-to-br from-gray-50 to-white border-gray-300";
+        return "bg-gradient-to-br from-gray-100 to-white border-gray-400";
     }
   };
 
   const getEmotionColor = (emotionId: string) => {
     switch (emotionId) {
       case "happy":
-        return "from-yellow-400 to-orange-400";
+        return "from-yellow-500 to-orange-500";
       case "sad":
-        return "from-blue-400 to-indigo-400";
+        return "from-blue-500 to-indigo-600";
       case "angry":
-        return "from-red-400 to-pink-400";
+        return "from-red-500 to-pink-600";
       case "fear":
-        return "from-purple-400 to-violet-400";
+        return "from-purple-500 to-violet-600";
       case "disgust":
-        return "from-green-400 to-emerald-400";
+        return "from-green-500 to-emerald-600";
       default:
-        return "from-gray-400 to-gray-500";
+        return "from-gray-600 to-gray-700";
     }
   };
 
@@ -94,24 +94,14 @@ export default function EmotionCard({
         />
       </div>
       <div
-        className={`rounded-full px-4 py-2 bg-gradient-to-r ${getEmotionColor(
+        className={`rounded-full px-4 py-3 bg-gradient-to-r ${getEmotionColor(
           emotion.id
-        )} transition-transform duration-300`}
+        )} transition-transform duration-300 shadow-lg`}
       >
-        <h4 className="text-xl font-bold text-center text-white drop-shadow-sm">
+        <h4 className="text-2xl font-black text-center text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">
           {emotion.name}
         </h4>
       </div>
-
-      {selected && (
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg"
-        >
-          ✓
-        </motion.div>
-      )}
     </motion.div>
   );
 }
