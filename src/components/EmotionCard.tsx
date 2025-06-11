@@ -69,7 +69,7 @@ export default function EmotionCard({
       <div className="w-full aspect-square relative overflow-hidden rounded-xl transform transition-transform duration-300">
         <Image
           src={
-            style === "blackAndWhite"
+            style === "blackAndWhite" || style === "coloredCartoon"
               ? emotion.id === "happy"
                 ? "/emotions/blackAndWhite/criancafeliz.jpg"
                 : emotion.id === "sad"
@@ -80,6 +80,18 @@ export default function EmotionCard({
                 ? "/emotions/blackAndWhite/criancamedo.jpg"
                 : emotion.id === "disgust"
                 ? "/emotions/blackAndWhite/criancanojo.jpg"
+                : emotion.id === "anxiety"
+                ? "/emotions/blackAndWhite/criancaansiosa.jpg"
+                : emotion.id === "shame"
+                ? "/emotions/blackAndWhite/criancavergonha.jpg"
+                : emotion.id === "shy"
+                ? "/emotions/blackAndWhite/criancatimida.jpg"
+                : emotion.id === "surprise"
+                ? "/emotions/blackAndWhite/criancasurpresa.jpg"
+                : emotion.id === "love"
+                ? "/emotions/blackAndWhite/criancaapaixonada.jpg"
+                : emotion.id === "envy"
+                ? "/emotions/blackAndWhite/criancainveja.jpg.webp"
                 : `/emotions/${style}/${emotion.id}.svg`
               : `/emotions/${style}/${emotion.id}.svg`
           }
