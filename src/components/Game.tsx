@@ -19,10 +19,20 @@ export default function Game({ level, onComplete }: GameProps) {
   const totalRounds = 5;
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const [targetEmotions, setTargetEmotions] = useState<Emotion[]>([]);
+
+  // Initialize target emotions for all rounds
+  useEffect(() => {
+    const shuffledEmotions = [...level.emotions].sort(
+      () => Math.random() - 0.5
+    );
+    setTargetEmotions(shuffledEmotions.slice(0, totalRounds));
+  }, [level.emotions]);
 
   const generateNewRound = useCallback(() => {
-    const targetEmotion =
-      level.emotions[Math.floor(Math.random() * level.emotions.length)];
+    if (!targetEmotions[rounds]) return;
+
+    const targetEmotion = targetEmotions[rounds];
     const remainingEmotions = level.emotions.filter(
       (e) => e.id !== targetEmotion.id
     );
@@ -36,15 +46,22 @@ export default function Game({ level, onComplete }: GameProps) {
     setCurrentEmotion(targetEmotion);
     setOptions(roundOptions);
     setSelectedEmotion(null);
-  }, [level.emotions]);
+  }, [level.emotions, rounds, targetEmotions]);
 
   useEffect(() => {
-    if (rounds < totalRounds) {
+    if (rounds < totalRounds && targetEmotions.length > 0) {
       generateNewRound();
-    } else {
+    } else if (rounds >= totalRounds) {
       onComplete(score);
     }
-  }, [rounds, generateNewRound, onComplete, score, totalRounds]);
+  }, [
+    rounds,
+    generateNewRound,
+    onComplete,
+    score,
+    totalRounds,
+    targetEmotions,
+  ]);
 
   const handleSelect = (emotion: Emotion) => {
     if (selectedEmotion) return; // Prevent multiple selections while animating
