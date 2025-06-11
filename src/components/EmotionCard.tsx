@@ -39,7 +39,6 @@ export default function EmotionCard({
     selected: {
       scale: 1.1,
       rotate: 0,
-      boxShadow: "0 0 0 4px #4CAF50",
       transition: { type: "spring", stiffness: 400, damping: 10 },
     },
   };

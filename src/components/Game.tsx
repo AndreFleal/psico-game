@@ -46,6 +46,8 @@ export default function Game({ level, onComplete }: GameProps) {
     setCurrentEmotion(targetEmotion);
     setOptions(roundOptions);
     setSelectedEmotion(null);
+    setShowFeedback(false);
+    setIsCorrect(false);
   }, [level.emotions, rounds, targetEmotions]);
 
   useEffect(() => {
