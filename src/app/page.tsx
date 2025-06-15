@@ -26,16 +26,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {mounted &&
-            levels.map((level, index) => (
-              <LevelCard
-                key={level.id}
-                level={level}
-                isUnlocked={
-                  index === 0 ||
-                  Number(localStorage.getItem("highestLevel")) >= index
-                }
-              />
-            ))}
+            levels.map((level) => <LevelCard key={level.id} level={level} />)}
         </div>
       </div>
     </main>

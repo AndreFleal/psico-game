@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Level, levels } from "@/types/game";
 import Game from "@/components/Game";
@@ -12,10 +12,10 @@ interface GamePageProps {
 export default function GamePage({ params }: GamePageProps) {
   const router = useRouter();
   const [level, setLevel] = useState<Level | null>(null);
+  const unwrappedParams = React.use(params);
 
-  const initializeLevel = useCallback(() => {
-    // Using .id directly for backwards compatibility during migration
-    const levelId = Number(params.id);
+  useEffect(() => {
+    const levelId = Number(unwrappedParams.id);
     const currentLevel = levels.find((l) => l.id === levelId);
 
     if (!currentLevel) {
@@ -23,30 +23,10 @@ export default function GamePage({ params }: GamePageProps) {
       return;
     }
 
-    const highestLevel = localStorage.getItem("highestLevel");
-    if (levelId > 1 && (!highestLevel || levelId > Number(highestLevel))) {
-      router.push("/");
-      return;
-    }
-
     setLevel(currentLevel);
-  }, [params.id, router]);
-
-  useEffect(() => {
-    initializeLevel();
-  }, [initializeLevel]);
+  }, [unwrappedParams.id, router]);
 
   const handleGameComplete = (score: number) => {
-    const currentHighestLevel = localStorage.getItem("highestLevel");
-    const levelId = Number(params.id);
-
-    if (
-      score >= 3 &&
-      (!currentHighestLevel || levelId >= Number(currentHighestLevel))
-    ) {
-      localStorage.setItem("highestLevel", (levelId + 1).toString());
-    }
-
     router.push("/game-complete");
   };
 

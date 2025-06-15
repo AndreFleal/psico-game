@@ -68,7 +68,26 @@ export default function EmotionCard({
       )}`}
     >
       <Image
-        src={`/emotions/${style}/crianca${emotion.id}.jpg`}
+        src={`/emotions/blackAndWhite/foto${
+          emotion.id === 'happy' ? 'feliz' : 
+          emotion.id === 'sad' ? 'triste' : 
+          emotion.id === 'angry' ? 'raiva' :
+          emotion.id === 'fear' ? 'medo' :
+          emotion.id === 'disgust' ? 'nojo' :
+          emotion.id === 'anxiety' ? 'ansiedade' :
+          emotion.id === 'shame' ? 'vergonha' :
+          emotion.id === 'shy' ? 'timidez' :
+          emotion.id === 'surprise' ? 'surpresa' :
+          emotion.id === 'love' ? 'apaixonado' :
+          emotion.id === 'envy' ? 'inveja' :
+          emotion.id === 'jealousy' ? 'ciumes' :
+          emotion.id === 'pride' ? 'orgulho' :
+          emotion.id === 'guilt' ? 'culpa' :
+          emotion.id === 'admiration' ? 'admiracao' :
+          emotion.id === 'relief' ? 'aliviado' :
+          emotion.id
+        }.jpeg`
+        }
         alt={emotion.name}
         fill
         sizes="(max-width: 640px) 45vw, (max-width: 768px) 30vw, 25vw"
