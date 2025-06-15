@@ -9,7 +9,7 @@ import Image from "next/image";
 
 interface GameProps {
   level: Level;
-  onComplete: (score: number) => void;
+  onComplete: () => void;
 }
 
 export default function Game({ level, onComplete }: GameProps) {
@@ -69,13 +69,13 @@ export default function Game({ level, onComplete }: GameProps) {
     setShowFeedback(false);
     setIsCorrect(false);
     setShowConfetti(false);
-  }, [level.emotions, rounds, targetEmotions]);
+  }, [level.emotions, level.id, rounds, targetEmotions]);
 
   useEffect(() => {
     if (rounds < totalRounds && targetEmotions.length > 0) {
       generateNewRound();
     } else if (rounds >= totalRounds) {
-      onComplete(score);
+      onComplete();
     }
   }, [
     rounds,

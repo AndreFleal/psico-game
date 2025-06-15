@@ -26,7 +26,7 @@ export default function GamePage({ params }: GamePageProps) {
     setLevel(currentLevel);
   }, [unwrappedParams.id, router]);
 
-  const handleGameComplete = (score: number) => {
+  const handleGameComplete = () => {
     router.push("/game-complete");
   };
 
