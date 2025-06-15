@@ -96,33 +96,33 @@ export default function Game({ level, onComplete }: GameProps) {
   if (!currentEmotion) return null;
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <div className="mb-8 text-center">
+    <div className="max-w-4xl mx-auto p-2 sm:p-4 lg:p-6">
+      <div className="mb-4 sm:mb-6 lg:mb-8 text-center">
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="bg-white rounded-2xl shadow-lg p-6 mb-4"
+          className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-3 sm:p-4 lg:p-6 mb-4"
         >
-          <h2 className="text-3xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
             Encontre a expressão:
           </h2>
-          <p className="text-2xl font-bold text-gray-800 p-3 rounded-lg bg-gradient-to-r from-purple-100 to-pink-100">
+          <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 p-2 sm:p-3 rounded-lg bg-gradient-to-r from-purple-100 to-pink-100">
             {currentEmotion.name}
           </p>
         </motion.div>
 
-        <div className="flex items-center justify-between mb-4 bg-white rounded-xl p-4 shadow-md">
-          <p className="text-xl font-bold text-gray-700">
+        <div className="flex flex-col sm:flex-row items-center justify-between mb-4 bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-md gap-2 sm:gap-0">
+          <p className="text-base sm:text-lg lg:text-xl font-bold text-gray-700">
             Rodada {rounds + 1} de {totalRounds}
           </p>
-          <p className="text-xl font-bold text-purple-600">
+          <p className="text-base sm:text-lg lg:text-xl font-bold text-purple-600">
             Pontuação: {score} {score > 0 ? "🌟" : ""}
           </p>
         </div>
 
-        <div className="w-full bg-gray-200 rounded-full h-4 mb-4 overflow-hidden shadow-inner">
+        <div className="w-full bg-gray-200 rounded-full h-3 sm:h-4 mb-4 overflow-hidden shadow-inner">
           <motion.div
-            className="h-4 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"
+            className="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500"
             initial={{ width: 0 }}
             animate={{ width: `${(rounds / totalRounds) * 100}%` }}
             transition={{ duration: 0.5 }}
@@ -130,7 +130,7 @@ export default function Game({ level, onComplete }: GameProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 relative">
         {options.map((emotion) => (
           <EmotionCard
             key={emotion.id}
@@ -159,14 +159,16 @@ export default function Game({ level, onComplete }: GameProps) {
               times: [0, 0.5, 1],
               repeat: Infinity,
             }}
-            className={`text-8xl ${isCorrect ? "drop-shadow-2xl" : ""}`}
+            className={`text-6xl sm:text-7xl lg:text-8xl ${
+              isCorrect ? "drop-shadow-2xl" : ""
+            }`}
           >
             {getFeedbackEmoji(isCorrect)}
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className={`absolute mt-24 text-2xl font-bold ${
+            className={`absolute mt-24 text-xl sm:text-2xl font-bold ${
               isCorrect ? "text-green-500" : "text-purple-500"
             }`}
           >

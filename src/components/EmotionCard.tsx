@@ -62,62 +62,19 @@ export default function EmotionCard({
       initial="initial"
       animate={selected ? "selected" : "animate"}
       whileHover="hover"
-      className={`relative p-3 rounded-2xl border-4 ${getStyleClasses(style)}`}
       onClick={() => onSelect(emotion)}
+      className={`relative aspect-square rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer border-2 ${getStyleClasses(
+        style
+      )}`}
     >
-      <div className="w-full aspect-square relative overflow-hidden rounded-xl transform transition-transform duration-300">
-        <Image
-          src={
-            style === "blackAndWhite" ||
-            style === "coloredCartoon" ||
-            style === "realistic"
-              ? emotion.id === "happy"
-                ? "/emotions/blackAndWhite/criancafeliz.jpg"
-                : emotion.id === "sad"
-                ? "/emotions/blackAndWhite/criancatriste.jpg"
-                : emotion.id === "angry"
-                ? "/emotions/blackAndWhite/criancaraiva.jpg"
-                : emotion.id === "fear"
-                ? "/emotions/blackAndWhite/criancamedo.jpg"
-                : emotion.id === "disgust"
-                ? "/emotions/blackAndWhite/criancanojo.jpg"
-                : emotion.id === "anxiety"
-                ? "/emotions/blackAndWhite/criancaansiosa.jpg"
-                : emotion.id === "shame"
-                ? "/emotions/blackAndWhite/criancavergonha.jpg"
-                : emotion.id === "shy"
-                ? "/emotions/blackAndWhite/criancatimida.jpg"
-                : emotion.id === "surprise"
-                ? "/emotions/blackAndWhite/criancasurpresa.jpg"
-                : emotion.id === "love"
-                ? "/emotions/blackAndWhite/criancaapaixonada.jpg"
-                : emotion.id === "envy"
-                ? "/emotions/blackAndWhite/criancainveja.jpg.webp"
-                : emotion.id === "jealousy"
-                ? "/emotions/blackAndWhite/criancaciumes.jpg"
-                : emotion.id === "pride"
-                ? "/emotions/blackAndWhite/criancaorgulho.jpg"
-                : emotion.id === "guilt"
-                ? "/emotions/blackAndWhite/criancaculpa.jpg"
-                : emotion.id === "admiration"
-                ? "/emotions/blackAndWhite/criancaadmiracao.jpeg"
-                : `/emotions/${style}/${emotion.id}.svg`
-              : `/emotions/${style}/${emotion.id}.svg`
-          }
-          alt={emotion.name}
-          fill
-          className="object-contain"
-        />
-      </div>
-      {selected && (
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg z-10"
-        >
-          ✓
-        </motion.div>
-      )}
+      <Image
+        src={`/emotions/${style}/crianca${emotion.id}.jpg`}
+        alt={emotion.name}
+        fill
+        sizes="(max-width: 640px) 45vw, (max-width: 768px) 30vw, 25vw"
+        className="object-cover w-full h-full transform transition-transform duration-300"
+        priority
+      />
     </motion.div>
   );
 }
