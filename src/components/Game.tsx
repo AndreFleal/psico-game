@@ -43,15 +43,25 @@ export default function Game({ level, onComplete }: GameProps) {
     setRoundId(newRoundId);
 
     const targetEmotion = targetEmotions[rounds];
-    const remainingEmotions = level.emotions.filter(
-      (e) => e.id !== targetEmotion.id
-    );
-    const shuffledEmotions = [...remainingEmotions].sort(
-      () => Math.random() - 0.5
-    );
-    const roundOptions = [targetEmotion, ...shuffledEmotions.slice(0, 3)].sort(
-      () => Math.random() - 0.5
-    );
+
+    // Filtrar as emoções baseado no nível atual
+    const levelEmotions =
+      level.id === 1
+        ? level.emotions.filter((e) =>
+            ["happy", "sad", "angry", "fear", "disgust"].includes(e.id)
+          )
+        : level.id === 2
+        ? level.emotions.filter((e) =>
+            ["anxiety", "shame", "shy", "surprise", "love", "envy"].includes(
+              e.id
+            )
+          )
+        : level.emotions.filter((e) =>
+            ["jealousy", "pride", "guilt", "admiration"].includes(e.id)
+          );
+
+    // Embaralhar todas as emoções do nível atual
+    const roundOptions = [...levelEmotions].sort(() => Math.random() - 0.5);
 
     setCurrentEmotion(targetEmotion);
     setOptions(roundOptions);
@@ -206,7 +216,7 @@ export default function Game({ level, onComplete }: GameProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 relative">
         <AnimatePresence mode="wait">
           {options.map((emotion) => (
             <motion.button
@@ -218,7 +228,7 @@ export default function Game({ level, onComplete }: GameProps) {
               whileTap={{ scale: 0.95 }}
               onClick={() => handleSelect(emotion)}
               disabled={!!selectedEmotion}
-              className={`p-4 rounded-xl text-lg font-bold transition-colors duration-300 ${
+              className={`p-3 rounded-xl text-base font-bold transition-colors duration-300 ${
                 selectedEmotion
                   ? emotion.id === currentEmotion.id
                     ? "bg-green-500 text-white"
